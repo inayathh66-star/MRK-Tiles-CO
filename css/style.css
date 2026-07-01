@@ -549,3 +549,8 @@ img.lazy.loaded{opacity:1;}
 
 .text-center{text-align:center;}
 .mt-40{margin-top:40px;}
+.logo {
+  width: 60px;
+  height: auto;
+  margin-right: 10px;
+}
