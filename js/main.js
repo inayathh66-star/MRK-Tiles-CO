@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('contact-form');
   if (form) {
     form.addEventListener('submit', (e) => {
-      e.preventDefault();
+      
       let valid = true;
       const fields = [
         {id:'fullname', test:v=>v.trim().length>2},
@@ -190,10 +190,27 @@ document.addEventListener('DOMContentLoaded', () => {
         if(!ok) valid = false;
       });
       if (valid) {
+
+    fetch("/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams(new FormData(form)).toString()
+    })
+    .then(() => {
         form.reset();
-        document.querySelector('.form-success').classList.add('show');
-        setTimeout(()=>document.querySelector('.form-success').classList.remove('show'), 5000);
-      }
+        document.querySelector(".form-success").classList.add("show");
+
+        setTimeout(() => {
+            document.querySelector(".form-success").classList.remove("show");
+        }, 5000);
+    })
+    .catch(() => {
+        alert("Failed to send enquiry.");
+    });
+
+}
     });
   }
 
